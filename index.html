@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Flor animada</title>
+</head>
+
+<body>
+    <div class="contenedor" id="puntos_contenedor">
+    </div> 
+
+    <script>
+        const contenedor = document.getElementById("puntos_contenedor");
+        const numPuntos = 10;
+
+        function crearPuntos() {
+            const punto = document.createElement("div");
+            punto.classList.add("punto");
+            contenedor.appendChild(punto);
+
+            punto.style.left = "50%";
+            punto.style.top = "50%";
+
+            const animacion = punto.animate(
+                [
+                    { transform: "translate(-50%, -50%) rotate(-50deg)" },
+                    { transform: "translate(5%, -20%)"}
+                ],
+                {
+                    duration: 2000 + Math.random() * 2000,
+                    easing: "linear",
+                    iterations: Infinity,
+                    direction: "alternate",
+                }
+            );
+            return { punto, animacion };
+        }
+
+        function iniciarAnimacion() {
+            for (let i = 0; i < numPuntos; i++) {
+                crearPuntos();
+            }
+        }
+
+        iniciarAnimacion();
+    </script>
+</body>
+</html>
+
